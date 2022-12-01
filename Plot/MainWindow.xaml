@@ -8,9 +8,7 @@
         Title="MainWindow" Height="450" Width="800">
     <Grid>
         <WpfPlot Name="plt" Margin="10,20,200,10" />
-        <Button x:Name="btm1" Content="Sin Y*X" HorizontalAlignment="Left" Margin="623,20,0,0" VerticalAlignment="Top" Height="55" Width="140" Click="btm1_Click"/>
-        <Button x:Name="btm2" Content="Cos Y*X" HorizontalAlignment="Left" Margin="623,106,0,0" VerticalAlignment="Top" Height="55" Width="140" Click="btm2_Click"/>
-        <TextBox x:Name="textBox1" TextAlignment ="Center" VerticalContentAlignment="Center" HorizontalAlignment="Left" Margin="623,20,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="140" Height="55" Visibility="Hidden" KeyDown="textBox1_KeyDown"/>
-        <TextBox x:Name="textBox2" TextAlignment ="Center" VerticalContentAlignment="Center" HorizontalAlignment="Left" Margin="623,20,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="140" Height="55" Visibility="Hidden" KeyDown="textBox2_KeyDown"/>
+        <TextBox x:Name="textBox1" TextAlignment ="Center" VerticalContentAlignment="Center" HorizontalAlignment="Left" Margin="629,50,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="140" Height="55" Visibility="Visible" KeyDown="textBox1_KeyDown"/>
+        <Button Content="Clean up plot" HorizontalAlignment="Left" Height="56" Margin="629,315,0,0" VerticalAlignment="Top" Width="140" Click="Button_Click_1"/>
     </Grid>
 </Window>
