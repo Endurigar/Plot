@@ -107,6 +107,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="PlotManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>

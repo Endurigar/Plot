@@ -22,9 +22,11 @@ namespace Plot
     /// </summary>
     public partial class MainWindow : Window
     {
+        private PlotManager plotManager;
         public MainWindow()
         {
             InitializeComponent();
+            plotManager = new PlotManager();
         }
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
@@ -34,142 +36,7 @@ namespace Plot
         {
             if(e.Key == Key.Enter)
             {
-                string text = textBox1.Text;
-                string sin ="sin";
-                string cos ="cos";
-                //Simple plots
-                if (text.Contains(sin) && !text.Contains('-') && !text.Contains('+') && !text.Contains('*') && !text.Contains('/'))
-                {
-                    double y = Finder.Сoefficient(text);
-                    var func1 = new Func<double, double?>((x) => Math.Sin(y*x));
-                    plt.Plot.AddFunction(func1, lineWidth: 5);
-                    plt.Refresh();
-                }
-                if (text.Contains(cos) && !text.Contains('-') && !text.Contains('+') && !text.Contains('*') && !text.Contains('/'))
-                {
-                    double y = Finder.Сoefficient(text);
-                    var func1 = new Func<double, double?>((x) => Math.Cos(y * x));
-                    plt.Plot.AddFunction(func1, lineWidth: 5);
-                    plt.Refresh();
-                }
-                //Plots with '-' & '+'
-                if (text.Contains('-'))
-                {
-                    int Index = text.IndexOf('-');
-                    string firstPart = text.Substring(0, Index - 1);
-                    string secondPart = text.Substring(Index+1);
-                    double firstPartCoff = Finder.Сoefficient(firstPart);
-                    double secondPartCoff = Finder.Сoefficient(secondPart);
-                    if (firstPart.Contains(sin) && !secondPart.Contains(sin))
-                    {
-                        var func1 = new Func<double, double?>((x) => Math.Sin(firstPartCoff * x) - Math.Cos(secondPartCoff*x));
-                        plt.Plot.AddFunction(func1, lineWidth: 5);
-                        plt.Refresh();
-                    }
-                    else if(firstPart.Contains(sin) && secondPart.Contains(sin))
-                    {
-                        var func1 = new Func<double, double?>((x) => Math.Sin(firstPartCoff * x) - Math.Sin(secondPartCoff*x));
-                        plt.Plot.AddFunction(func1, lineWidth: 5);
-                        plt.Refresh();
-                    }
-                    if(firstPart.Contains(cos)&&!secondPart.Contains(cos))
-                    {
-                        var func1 = new Func<double, double?>((x) => Math.Cos(firstPartCoff * x) - Math.Sin(secondPartCoff*x));
-                        plt.Plot.AddFunction(func1, lineWidth: 5);
-                        plt.Refresh();
-                    }
-                    else if(firstPart.Contains(cos)&&secondPart.Contains(cos))
-                    {
-                        var func1 = new Func<double, double?>((x) => Math.Cos(firstPartCoff * x) - Math.Cos(secondPartCoff*x));
-                        plt.Plot.AddFunction(func1, lineWidth: 5);
-                        plt.Refresh();
-                    }
-                }
-                if (text.Contains('+'))
-                {
-                    int Index = text.IndexOf('+');
-                    string firstPart = text.Substring(0, Index - 1);
-                    string secondPart = text.Substring(Index + 1);
-                    double firstPartCoff = Finder.Сoefficient(firstPart);
-                    double secondPartCoff = Finder.Сoefficient(secondPart);
-                    if (firstPart.Contains(sin) && !secondPart.Contains(sin))
-                    {
-                        var func1 = new Func<double, double?>((x) => Math.Sin(firstPartCoff * x) + Math.Cos(secondPartCoff*x));
-                        plt.Plot.AddFunction(func1, lineWidth: 5);
-                        plt.Refresh();
-                    }
-                    else if (firstPart.Contains(sin) && secondPart.Contains(sin))
-                    {
-                        var func1 = new Func<double, double?>((x) => Math.Sin(firstPartCoff * x) + Math.Sin(secondPartCoff*x));
-                        plt.Plot.AddFunction(func1, lineWidth: 5);
-                        plt.Refresh();
-                    }
-                    else if (firstPart.Contains(cos) && secondPart.Contains(cos))
-                    {
-                        var func1 = new Func<double, double?>((x) => Math.Cos(firstPartCoff * x) + Math.Cos(secondPartCoff*x));
-                        plt.Plot.AddFunction(func1, lineWidth: 5);
-                        plt.Refresh();
-                    }
-                }
-                //Plots '*' & '/'
-                if (text.Contains('*'))
-                {
-                    int Index = text.IndexOf('*');
-                    string firstPart = text.Substring(0, Index - 1);
-                    string secondPart = text.Substring(Index + 1);
-                    double firstPartCoff = Finder.Сoefficient(firstPart);
-                    double secondPartCoff = Finder.Сoefficient(secondPart);
-                    if (firstPart.Contains(sin) && !secondPart.Contains(sin))
-                    {
-                        var func1 = new Func<double, double?>((x) => Math.Sin(firstPartCoff * x) * Math.Cos(secondPartCoff * x));
-                        plt.Plot.AddFunction(func1, lineWidth: 5);
-                        plt.Refresh();
-                    }
-                    else if (firstPart.Contains(sin) && secondPart.Contains(sin))
-                    {
-                        var func1 = new Func<double, double?>((x) => Math.Sin(firstPartCoff * x) * Math.Sin(secondPartCoff * x));
-                        plt.Plot.AddFunction(func1, lineWidth: 5);
-                        plt.Refresh();
-                    }
-                    else if (firstPart.Contains(cos) && secondPart.Contains(cos))
-                    {
-                        var func1 = new Func<double, double?>((x) => Math.Cos(firstPartCoff * x) * Math.Cos(secondPartCoff * x));
-                        plt.Plot.AddFunction(func1, lineWidth: 5);
-                        plt.Refresh();
-                    }
-                }
-                if (text.Contains('/'))
-                {
-                    int Index = text.IndexOf('/');
-                    string firstPart = text.Substring(0, Index - 1);
-                    string secondPart = text.Substring(Index + 1);
-                    double firstPartCoff = Finder.Сoefficient(firstPart);
-                    double secondPartCoff = Finder.Сoefficient(secondPart);
-                    if (firstPart.Contains(sin) && !secondPart.Contains(sin))
-                    {
-                        var func1 = new Func<double, double?>((x) => Math.Sin(firstPartCoff * x) / Math.Cos(secondPartCoff * x));
-                        plt.Plot.AddFunction(func1, lineWidth: 5);
-                        plt.Refresh();
-                    }
-                    else if (firstPart.Contains(sin) && secondPart.Contains(sin))
-                    {
-                        var func1 = new Func<double, double?>((x) => Math.Sin(firstPartCoff * x) / Math.Sin(secondPartCoff * x));
-                        plt.Plot.AddFunction(func1, lineWidth: 5);
-                        plt.Refresh();
-                    }
-                    if (firstPart.Contains(cos) && !secondPart.Contains(cos))
-                    {
-                        var func1 = new Func<double, double?>((x) => Math.Cos(firstPartCoff * x) / Math.Sin(secondPartCoff * x));
-                        plt.Plot.AddFunction(func1, lineWidth: 5);
-                        plt.Refresh();
-                    }
-                    else if (firstPart.Contains(cos) && secondPart.Contains(cos))
-                    {
-                        var func1 = new Func<double, double?>((x) => Math.Cos(firstPartCoff * x) / Math.Cos(secondPartCoff * x));
-                        plt.Plot.AddFunction(func1, lineWidth: 5);
-                        plt.Refresh();
-                    }
-                }
+                plotManager.Calculate(textBox1.Text, plt);
             }
         }
     }
